@@ -23,7 +23,7 @@ export default function ServicosScreen() {
   function remover(id: number) {
     excluirServico(id);
     carregar();
-  }
+  } 
 
   useEffect(() => {
     carregar();
