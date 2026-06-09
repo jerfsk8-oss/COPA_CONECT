@@ -1,20 +1,35 @@
-import { useState } from 'react';
+import { useLocalSearchParams } from 'expo-router';
+import { useEffect, useState } from 'react';
 import {
-  Alert,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    Alert,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from 'react-native';
 
-import { inserirServico } from './database/db';
+import {
+    atualizarServico,
+    inserirServico,
+} from '../database/db';
 
 export default function CadastroScreen() {
+  const params = useLocalSearchParams();
+
   const [nome, setNome] = useState('');
   const [categoria, setCategoria] = useState('');
   const [telefone, setTelefone] = useState('');
   const [descricao, setDescricao] = useState('');
+
+  const id = params.id ? Number(params.id) : null;
+
+  useEffect(() => {
+    if (params.nome) setNome(String(params.nome));
+    if (params.categoria) setCategoria(String(params.categoria));
+    if (params.telefone) setTelefone(String(params.telefone));
+    if (params.descricao) setDescricao(String(params.descricao));
+  }, []);
 
   function salvar() {
     if (!nome || !categoria) {
@@ -22,17 +37,26 @@ export default function CadastroScreen() {
       return;
     }
 
-    inserirServico(
-      nome,
-      categoria,
-      telefone,
-      descricao
-    );
+    if (id) {
+      atualizarServico(
+        id,
+        nome,
+        categoria,
+        telefone,
+        descricao
+      );
 
-    Alert.alert(
-      'Sucesso',
-      'Serviço cadastrado com sucesso!'
-    );
+      Alert.alert('Sucesso', 'Serviço atualizado com sucesso!');
+    } else {
+      inserirServico(
+        nome,
+        categoria,
+        telefone,
+        descricao
+      );
+
+      Alert.alert('Sucesso', 'Serviço cadastrado com sucesso!');
+    }
 
     setNome('');
     setCategoria('');
@@ -42,7 +66,9 @@ export default function CadastroScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Cadastrar Serviço</Text>
+      <Text style={styles.title}>
+        {id ? 'Editar Serviço' : 'Cadastrar Serviço'}
+      </Text>
 
       <TextInput
         style={styles.input}
@@ -78,7 +104,7 @@ export default function CadastroScreen() {
         onPress={salvar}
       >
         <Text style={styles.buttonText}>
-          Salvar Serviço
+          {id ? 'Atualizar Serviço' : 'Salvar Serviço'}
         </Text>
       </TouchableOpacity>
     </View>

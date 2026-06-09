@@ -1,16 +1,17 @@
+import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import {
-    FlatList,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 import {
-    excluirServico,
-    listarServicos,
-} from './database/db';
+  excluirServico,
+  listarServicos,
+} from '../database/db';
 
 export default function ServicosScreen() {
   const [servicos, setServicos] = useState<any[]>([]);
@@ -23,7 +24,7 @@ export default function ServicosScreen() {
   function remover(id: number) {
     excluirServico(id);
     carregar();
-  } 
+  }
 
   useEffect(() => {
     carregar();
@@ -31,39 +32,45 @@ export default function ServicosScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Serviços Cadastrados
-      </Text>
+      <Text style={styles.title}>Serviços Cadastrados</Text>
 
       <FlatList
         data={servicos}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.card}>
-            <Text style={styles.nome}>
-              {item.nome}
-            </Text>
+            <Text style={styles.nome}>{item.nome}</Text>
 
-            <Text>
-              Categoria: {item.categoria}
-            </Text>
+            <Text>Categoria: {item.categoria}</Text>
+            <Text>Telefone: {item.telefone}</Text>
+            <Text>{item.descricao}</Text>
 
-            <Text>
-              Telefone: {item.telefone}
-            </Text>
+            <View style={styles.botoes}>
+              <TouchableOpacity
+                style={styles.botaoEditar}
+                onPress={() =>
+                  router.push({
+                    pathname: '/cadastro',
+                    params: {
+                      id: item.id,
+                      nome: item.nome,
+                      categoria: item.categoria,
+                      telefone: item.telefone,
+                      descricao: item.descricao,
+                    },
+                  })
+                }
+              >
+                <Text style={styles.textoBotao}>Editar</Text>
+              </TouchableOpacity>
 
-            <Text>
-              {item.descricao}
-            </Text>
-
-            <TouchableOpacity
-              style={styles.botaoExcluir}
-              onPress={() => remover(item.id)}
-            >
-              <Text style={styles.textoExcluir}>
-                Excluir
-              </Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.botaoExcluir}
+                onPress={() => remover(item.id)}
+              >
+                <Text style={styles.textoBotao}>Excluir</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         )}
       />
@@ -99,14 +106,29 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
 
-  botaoExcluir: {
-    backgroundColor: '#e63946',
+  botoes: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 10,
-    padding: 10,
-    borderRadius: 6,
   },
 
-  textoExcluir: {
+  botaoEditar: {
+    backgroundColor: '#457b9d',
+    flex: 1,
+    padding: 10,
+    borderRadius: 6,
+    marginRight: 5,
+  },
+
+  botaoExcluir: {
+    backgroundColor: '#e63946',
+    flex: 1,
+    padding: 10,
+    borderRadius: 6,
+    marginLeft: 5,
+  },
+
+  textoBotao: {
     color: '#fff',
     textAlign: 'center',
     fontWeight: 'bold',

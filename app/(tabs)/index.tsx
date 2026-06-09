@@ -1,7 +1,7 @@
 import { Link } from 'expo-router';
 import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { criarTabela } from '../database/db';
+import { criarTabela } from '../../database/db';
 
 export default function HomeScreen() {
 
