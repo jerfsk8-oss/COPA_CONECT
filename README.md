@@ -1,77 +1,113 @@
-# COPA_CONECT
+# COPA_CONNECT
 
-Aplicativo desenvolvido em React Native para conectar moradores de Copacabana a pequenos empreendedores e prestadores de serviços locais.
+## Integrante
 
-## Objetivo
+* Antonio Jefferson Santos Sousa
 
-O COPA_CONECT tem como objetivo facilitar a divulgação e a busca por serviços de profissionais autônomos da região, permitindo o cadastro e consulta de prestadores de serviços de forma simples e rápida.
+* Matricula: 202309055104
+
+
+## Descrição do Projeto
+
+O COPA_CONNECT é um aplicativo desenvolvido em React Native com o objetivo de conectar moradores de Copacabana a pequenos empreendedores e profissionais autônomos da região.
+
+A plataforma permite que profissionais divulguem seus serviços de forma simples e acessível, facilitando a busca e o contato por parte dos moradores do bairro.
+
+## Problema Social
+
+Muitos pequenos empreendedores possuem dificuldades para divulgar seus serviços localmente e alcançar novos clientes.
+
+O COPA_CONNECT busca fortalecer a economia local, aproximando moradores de profissionais independentes como massoterapeutas, eletricistas, barbeiros, professores particulares, técnicos de informática e outros prestadores de serviços.
 
 ## Tecnologias Utilizadas
 
-- React Native
-- Expo
-- Expo Router
-- SQLite
-- TypeScript
+* React Native
+* Expo
+* TypeScript
+* Expo Router
+* SQLite (expo-sqlite)
+* Git e GitHub
 
 ## Funcionalidades
 
-- Cadastro de serviços
-- Listagem de serviços cadastrados
-- Exclusão de serviços
-- Persistência de dados utilizando SQLite
-- Navegação entre telas
+### Cadastro de Serviços
+
+Permite cadastrar profissionais e serviços locais.
+
+### Consulta de Serviços
+
+Exibe todos os serviços cadastrados.
+
+### Edição de Serviços
+
+Permite atualizar informações dos profissionais cadastrados.
+
+### Exclusão de Serviços
+
+Permite remover serviços da base de dados.
+
+### Integração com WhatsApp
+
+Possibilita entrar em contato diretamente com o profissional através do WhatsApp.
+
+### Persistência Local
+
+Os dados são armazenados localmente utilizando SQLite, permitindo funcionamento offline.
 
 ## Estrutura do Projeto
 
-```text
-app/
-├── index.tsx
-├── cadastro.tsx
-├── servicos.tsx
-├── database/
-│   └── db.ts
+/app
+
+* index.tsx
+* cadastro.tsx
+* servicos.tsx
+
+/database
+
+* db.ts
+
+## Como Executar o Projeto
+
+### Clonar o repositório
+
+```bash
+git clone https://github.com/jerfsk8-oss/COPA_CONECT.git
 ```
 
-## Requisitos Técnicos Atendidos
-
-✅ React Native
-
-✅ Navegação entre telas
-
-✅ Banco de dados SQLite
-
-✅ Operações CRUD
-
-- Create (Criar)
-- Read (Consultar)
-- Delete (Excluir)
-- Update (Em desenvolvimento)
-
-✅ Interface responsiva para dispositivos móveis
-
-## Como Executar
-
-Instalar dependências:
+### Instalar dependências
 
 ```bash
 npm install
 ```
 
-Executar o projeto:
+### Executar o projeto
 
 ```bash
 npx expo start
 ```
 
-## Exemplo de Uso
+### Executar limpando cache (se necessário)
 
-1. Cadastrar um prestador de serviço.
-2. Consultar serviços cadastrados.
-3. Excluir registros quando necessário.
+```bash
+npx expo start --clear
+```
 
-## Autor
+## Demonstração
 
-Jefferson Sousa
+Fluxo principal do aplicativo:
 
-Projeto acadêmico da disciplina Programação para Dispositivos Móveis.
+1. Cadastrar serviço.
+2. Visualizar serviços cadastrados.
+3. Editar informações.
+4. Excluir registros.
+5. Entrar em contato pelo WhatsApp.
+
+## Repositório
+
+https://github.com/jerfsk8-oss/COPA_CONECT
+
+## Disciplina
+
+Programação para Dispositivos Móveis em Android
+
+Professor: Julio Cartier

@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import {
   FlatList,
+  Linking,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -26,6 +27,13 @@ export default function ServicosScreen() {
     carregar();
   }
 
+  function abrirWhatsApp(telefone: string) {
+  const numero = telefone.replace(/\D/g, '');
+  const url = `https://wa.me/55${numero}`;
+
+  Linking.openURL(url);
+}
+
   useEffect(() => {
     carregar();
   }, []);
@@ -46,6 +54,15 @@ export default function ServicosScreen() {
             <Text>{item.descricao}</Text>
 
             <View style={styles.botoes}>
+               <TouchableOpacity
+                  style={styles.botaoWhatsApp}
+                  onPress={() => abrirWhatsApp(item.telefone)}
+              >
+               <Text style={styles.textoBotao}>
+                WhatsApp
+                </Text>
+              </TouchableOpacity>
+
               <TouchableOpacity
                 style={styles.botaoEditar}
                 onPress={() =>
@@ -110,6 +127,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
+  },
+
+  botaoWhatsApp: {
+  backgroundColor: '#25D366',
+  flex: 1,
+  padding: 10,
+  borderRadius: 6,
+  marginRight: 5,
   },
 
   botaoEditar: {
